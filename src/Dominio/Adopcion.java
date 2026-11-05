@@ -4,11 +4,13 @@
  */
 package Dominio;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Tomas
  */
-public class Adopcion {
+public class Adopcion implements Serializable {
     private Animal animal;
     private Familia familia;
     private String comentario;

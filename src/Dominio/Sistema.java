@@ -3,12 +3,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Dominio;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.*;
+import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 /**
  *
  * @author Tomas
  */
-public class Sistema {
+public class Sistema implements Serializable{
     public ArrayList<Adopcion> listaAdopciones = new ArrayList<>();
     public ArrayList<Animal> listaAnimales = new ArrayList<>();
     public ArrayList<Donacion> listaDonaciones = new ArrayList<>();
@@ -22,15 +27,69 @@ public class Sistema {
     this.listaEmpresas = unaListaEmpresas;
     this.listaFamilias = unaListaFamilias;
     }
+    
+    
+    // parte de archivos y seri:
+    public void guardarDatos() {
+        try {
+            ObjectOutputStream out = new ObjectOutputStream(Files.newOutputStream(Paths.get("datos.ser")));
+            out.writeObject(this);
+            out.close();
 
-// Metodos de Adopcion.
+        } catch (IOException e) {
+            System.out.println("Error al guardar los datos del sistema");
+        }
+    }
+    // getters y setters
 
-// Metodos de Animal.
+    public ArrayList<Adopcion> getListaAdopciones() {
+        return listaAdopciones;
+    }
 
-// Metodos de Donacion.
+    public void setListaAdopciones(ArrayList<Adopcion> listaAdopciones) {
+        this.listaAdopciones = listaAdopciones;
+    }
 
-// Metodos de Empresa.
+    public ArrayList<Animal> getListaAnimales() {
+        return listaAnimales;
+    }
 
-// Metodos de Familia.
+    public void setListaAnimales(ArrayList<Animal> listaAnimales) {
+        this.listaAnimales = listaAnimales;
+    }
+
+    public ArrayList<Donacion> getListaDonaciones() {
+        return listaDonaciones;
+    }
+
+    public void setListaDonaciones(ArrayList<Donacion> listaDonaciones) {
+        this.listaDonaciones = listaDonaciones;
+    }
+
+    public ArrayList<Empresa> getListaEmpresas() {
+        return listaEmpresas;
+    }
+
+    public void setListaEmpresas(ArrayList<Empresa> listaEmpresas) {
+        this.listaEmpresas = listaEmpresas;
+    }
+
+    public ArrayList<Familia> getListaFamilias() {
+        return listaFamilias;
+    }
+
+    public void setListaFamilias(ArrayList<Familia> listaFamilias) {
+        this.listaFamilias = listaFamilias;
+    }
+    
+    // Metodos de Adopcion.
+
+    // Metodos de Animal.
+
+    // Metodos de Donacion.
+
+    // Metodos de Empresa.
+
+    // Metodos de Familia.
 
 }
