@@ -3,12 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Dominio;
-
+import java.io.Serializable;
 /**
  *
  * @author Tomas
  */
-public class Donacion {
+public class Donacion implements Serializable {
     
     private Empresa empresa;
     private int tipoAlimento;

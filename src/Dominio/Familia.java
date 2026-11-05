@@ -3,12 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Dominio;
-
+import java.io.Serializable;
 /**
  *
  * @author Tomas
  */
-public class Familia {
+public class Familia implements Serializable {
     private int cedula;
     private String apellido;
     private int celular;

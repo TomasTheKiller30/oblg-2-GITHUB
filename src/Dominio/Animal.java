@@ -3,11 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Dominio;
+
+import java.io.Serializable;
+
 /**
  *
  * @author Tomas
  */
-public class Animal {
+public class Animal implements Serializable {
     
     private String codigo;
     private String nombreAnimal;
