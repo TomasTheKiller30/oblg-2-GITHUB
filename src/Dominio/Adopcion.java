@@ -6,6 +6,8 @@ package Dominio;
 
 import java.io.Serializable;
 
+//Prueba push franco
+
 /**
  *
  * @author Tomas
