@@ -29,7 +29,7 @@ public class Sistema implements Serializable{
     }
     
     
-    // parte de archivos y seri:
+    // parte de archivos y seria:
     public void guardarDatos() {
         try {
             // 1. Instanciamos ObjectOutputStream y creamos el archivo "datos.ser" en la ruta del proyecto[cite: 11, 12]
