@@ -3,17 +3,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Interfaz;
+import Dominio.*;
+import MainPackage.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  *
  * @author Tomas
  */
 public class PanelPrincipal extends javax.swing.JFrame {
-
+    
+    private Sistema modelo;
     /**
      * Creates new form PanelPrincipal
      */
-    public PanelPrincipal() {
+    public PanelPrincipal(Sistema unSistema) {
+        this.modelo = unSistema;
         initComponents();
     }
 
@@ -73,7 +79,6 @@ public class PanelPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Refugio de perros");
         setBackground(new java.awt.Color(225, 237, 187));
-        setPreferredSize(new java.awt.Dimension(600, 390));
         getContentPane().setLayout(null);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Resumen del refugio"));
@@ -236,6 +241,11 @@ public class PanelPrincipal extends javax.swing.JFrame {
         menuAltas.setText("Altas");
 
         m_a_Animales.setText("Animales");
+        m_a_Animales.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                m_a_AnimalesActionPerformed(evt);
+            }
+        });
         menuAltas.add(m_a_Animales);
 
         m_a_Familias.setText("Familias");
@@ -292,8 +302,13 @@ public class PanelPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-  
+    private void m_a_AnimalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_a_AnimalesActionPerformed
+        VentanaAltaAnimal ventanaAlta = new VentanaAltaAnimal(this.modelo);
+        ventanaAlta.setVisible(true);
+    }//GEN-LAST:event_m_a_AnimalesActionPerformed
 
+  
+// esto en gris es el initComponents();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

@@ -20,12 +20,13 @@ public class Sistema implements Serializable{
     public ArrayList<Empresa> listaEmpresas = new ArrayList<>();
     public ArrayList<Familia> listaFamilias = new ArrayList<>();
     
-    public Sistema (ArrayList<Adopcion> unaListaAdopciones, ArrayList<Animal> unaListaAnimales, ArrayList<Donacion> unaListaDonaciones, ArrayList<Empresa> unaListaEmpresas, ArrayList<Familia> unaListaFamilias){
-    this.listaAdopciones = unaListaAdopciones;
-    this.listaAnimales = unaListaAnimales; 
-    this.listaDonaciones = unaListaDonaciones;
-    this.listaEmpresas = unaListaEmpresas;
-    this.listaFamilias = unaListaFamilias;
+    //constructor de Sistema
+    public Sistema (){
+    this.listaAdopciones = new ArrayList<>();
+    this.listaAnimales = new ArrayList<>(); 
+    this.listaDonaciones = new ArrayList<>();
+    this.listaEmpresas = new ArrayList<>();
+    this.listaFamilias = new ArrayList<>();
     }
     
     
@@ -74,14 +75,8 @@ public class Sistema implements Serializable{
     
     
     
-    
-    
-    
-    
-    
-    
     // getters y setters
-
+    
     public ArrayList<Adopcion> getListaAdopciones() {
         return listaAdopciones;
     }
@@ -124,7 +119,7 @@ public class Sistema implements Serializable{
     
     
     
-    
+
     
     
     
@@ -134,9 +129,32 @@ public class Sistema implements Serializable{
     
     
     // Metodos de Adopcion.
-
+        
     // Metodos de Animal.
-
+    
+    
+    //Devuelve true o false si el animal (por código) ya existe. PARA VALIDACIONES
+    public boolean existeAnimal(String codigoIng){
+        boolean existe = false;
+        
+        for (int i = 0 ; i < getListaAnimales().size() && !existe; i++ ){
+            String a = getListaAnimales().get(i).getCodigo();
+            if ( a.equalsIgnoreCase(codigoIng)){
+                existe = true;
+            }
+        }
+        return existe;
+    }
+    
+    public void registrarAnimal(String codigoIng, String nombreIng, String temperamentoIng, double pesoIng, String estadoIng){
+        
+        if (existeAnimal(codigoIng) == false){ 
+            Animal A = new Animal(codigoIng, nombreIng, temperamentoIng, pesoIng, estadoIng);
+            this.listaAnimales.add(A);
+        }
+    
+    }
+    
     // Metodos de Donacion.
 
     // Metodos de Empresa.

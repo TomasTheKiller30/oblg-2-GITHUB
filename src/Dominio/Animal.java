@@ -26,7 +26,7 @@ public class Animal implements Serializable {
         this.estado = unEstado;
         
     }
-
+    
     public String getCodigo() {
         return codigo;
     }
