@@ -118,16 +118,6 @@ public class Sistema implements Serializable{
     }
     
     
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
     // Metodos de Adopcion.
         
     // Metodos de Animal.
@@ -160,5 +150,25 @@ public class Sistema implements Serializable{
     // Metodos de Empresa.
 
     // Metodos de Familia.
+    
+    //Devuelve true si la familia ya existe según su cedula
+    public boolean existeFamilia(String ciFamilia){
+        boolean existe = false;
+        for (int i = 0 ; i < getListaFamilias().size() && !existe; i++){
+            String ciRegistrada = getListaFamilias().get(i).getCedula();
+            if ( ciRegistrada.equals(ciFamilia)){
+                existe = true;
+            }
+        }
+        return existe;
+    }
 
+    public void registrarFamilia(String cedulaIngreso, String apellidoIngreso, String celularIngreso){
+        if (!existeFamilia(cedulaIngreso)){
+            Familia A = new Familia(cedulaIngreso, apellidoIngreso, celularIngreso);
+            this.listaFamilias.add(A);
+        }
+    
+    }
+    
 }

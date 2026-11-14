@@ -9,21 +9,21 @@ import java.io.Serializable;
  * @author Tomas
  */
 public class Familia implements Serializable {
-    private int cedula;
+    private String cedula;
     private String apellido;
-    private int celular;
+    private String celular;
     
-    public Familia (int unaCedula, String unApellido, int unCelular){
+    public Familia (String unaCedula, String unApellido, String unCelular){
         this.cedula = unaCedula;
         this.apellido = unApellido;
         this.celular = unCelular;
-    }
-
-    public int getCedula() {
+    }    
+    
+    public String getCedula() {
         return cedula;
     }
 
-    public void setCedula(int cedula) {
+    public void setCedula(String cedula) {
         this.cedula = cedula;
     }
 
@@ -35,11 +35,11 @@ public class Familia implements Serializable {
         this.apellido = apellido;
     }
 
-    public int getCelular() {
+    public String getCelular() {
         return celular;
     }
 
-    public void setCelular(int celular) {
+    public void setCelular(String celular) {
         this.celular = celular;
     }
    
