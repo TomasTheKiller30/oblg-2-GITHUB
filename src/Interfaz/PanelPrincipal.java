@@ -249,9 +249,19 @@ public class PanelPrincipal extends javax.swing.JFrame {
         menuAltas.add(m_a_Animales);
 
         m_a_Familias.setText("Familias");
+        m_a_Familias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                m_a_FamiliasActionPerformed(evt);
+            }
+        });
         menuAltas.add(m_a_Familias);
 
         m_a_Empresas.setText("Empresas");
+        m_a_Empresas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                m_a_EmpresasActionPerformed(evt);
+            }
+        });
         menuAltas.add(m_a_Empresas);
 
         jMenuBar1.add(menuAltas);
@@ -306,6 +316,16 @@ public class PanelPrincipal extends javax.swing.JFrame {
         VentanaAltaAnimal ventanaAlta = new VentanaAltaAnimal(this.modelo);
         ventanaAlta.setVisible(true);
     }//GEN-LAST:event_m_a_AnimalesActionPerformed
+
+    private void m_a_FamiliasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_a_FamiliasActionPerformed
+        VentanaAltaFamilia ventanaAlta2 = new VentanaAltaFamilia(this.modelo);
+        ventanaAlta2.setVisible(true);
+    }//GEN-LAST:event_m_a_FamiliasActionPerformed
+
+    private void m_a_EmpresasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_a_EmpresasActionPerformed
+        VentanaAltaEmpresa ventanaAlta3 = new VentanaAltaEmpresa(this.modelo);
+        ventanaAlta3.setVisible(true);
+    }//GEN-LAST:event_m_a_EmpresasActionPerformed
 
   
 // esto en gris es el initComponents();

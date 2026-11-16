@@ -10,10 +10,10 @@ import java.io.Serializable;
  */
 public class Empresa implements Serializable {
     private String nombreEmpresa;
-    private int rut;
+    private String rut;
     private String direccion;
     
-    public Empresa (String unNombreEmpresa, int unRut, String unaDireccion){
+    public Empresa (String unNombreEmpresa, String unRut, String unaDireccion){
         this.nombreEmpresa = unNombreEmpresa;
         this.rut = unRut;
         this.direccion = unaDireccion;
@@ -27,12 +27,12 @@ public class Empresa implements Serializable {
         this.nombreEmpresa = nombreEmpresa;
     }
 
-    public int getRut() {
+    public String getRut() {
         return rut;
     }
 
-    public void setRut(int rut) {
-        this.rut = rut;
+    public void setRut(String unRut) {
+        this.rut = unRut;
     }
 
     public String getDireccion() {

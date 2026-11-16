@@ -149,6 +149,26 @@ public class Sistema implements Serializable{
 
     // Metodos de Empresa.
 
+    //Devuelve true si la empresa ya existe según su rut
+    public boolean existeEmpresa(String rutEmpresa){
+        boolean existe = false;
+        for (int i = 0 ; i < getListaEmpresas().size() && !existe; i++){
+            String rutRegistrado = getListaEmpresas().get(i).getRut();
+            if ( rutRegistrado.equals(rutEmpresa)){
+                existe = true;
+            }
+        }
+        return existe;
+    }
+
+    public void registrarEmpresa(String unNombreEmpresa, String unRut, String unaDireccion){
+        if (!existeEmpresa(unRut)){
+            Empresa A = new Empresa(unNombreEmpresa, unRut, unaDireccion);
+            this.listaEmpresas.add(A);
+        }
+    
+    }    
+    
     // Metodos de Familia.
     
     //Devuelve true si la familia ya existe según su cedula
