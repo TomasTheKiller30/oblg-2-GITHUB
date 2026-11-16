@@ -129,7 +129,24 @@ public class Sistema implements Serializable{
     
     
     // Metodos de Adopcion.
-        
+    
+    public ArrayList<Animal> getAnimalesDisponibles(){
+
+        ArrayList<Animal> l = new ArrayList<>();
+
+        for (int i = 0; i < getListaAnimales().size() ; i++ ){
+            Animal a = getListaAnimales().get(i);
+            if (a.getEstado().equals("Disponible")){
+            l.add(a);
+            }
+        }
+    return l;
+    }    
+    
+    public void realizarAdopcion(Animal unAnimal, Familia unaFamilia, String unComentario){
+        Adopcion A = new Adopcion(unAnimal, unaFamilia, unComentario);
+        getListaAdopciones().add(A);
+    }
     // Metodos de Animal.
     
     

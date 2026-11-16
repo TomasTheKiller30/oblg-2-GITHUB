@@ -27,6 +27,11 @@ public class Animal implements Serializable {
         
     }
     
+    @Override
+    public String toString(){
+    return this.nombreAnimal + " (" + this.codigo + ")";
+    }
+    
     public String getCodigo() {
         return codigo;
     }

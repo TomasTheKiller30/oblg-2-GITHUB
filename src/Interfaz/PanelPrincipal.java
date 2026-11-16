@@ -79,6 +79,8 @@ public class PanelPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Refugio de perros");
         setBackground(new java.awt.Color(225, 237, 187));
+        setPreferredSize(new java.awt.Dimension(580, 420));
+        setResizable(false);
         getContentPane().setLayout(null);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Resumen del refugio"));
@@ -208,7 +210,7 @@ public class PanelPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(resumen_AlimentoOtro))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1);
@@ -259,6 +261,11 @@ public class PanelPrincipal extends javax.swing.JFrame {
         menuMovimientos.setText("Movimientos");
 
         m_m_RealizarAdopcion.setText("Realizar adopción");
+        m_m_RealizarAdopcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                m_m_RealizarAdopcionActionPerformed(evt);
+            }
+        });
         menuMovimientos.add(m_m_RealizarAdopcion);
 
         m_m_CambiarDeEstado.setText("Cambiar de estado");
@@ -306,6 +313,11 @@ public class PanelPrincipal extends javax.swing.JFrame {
         VentanaAltaAnimal ventanaAlta = new VentanaAltaAnimal(this.modelo);
         ventanaAlta.setVisible(true);
     }//GEN-LAST:event_m_a_AnimalesActionPerformed
+
+    private void m_m_RealizarAdopcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_m_RealizarAdopcionActionPerformed
+        VentanaRealizarAdopcion ventanaAlta = new VentanaRealizarAdopcion(this.modelo);
+        ventanaAlta.setVisible(true);
+    }//GEN-LAST:event_m_m_RealizarAdopcionActionPerformed
 
   
 // esto en gris es el initComponents();
