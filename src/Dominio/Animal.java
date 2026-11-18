@@ -32,6 +32,11 @@ public class Animal implements Serializable {
     return this.nombreAnimal + " (" + this.codigo + ")";
     }
     
+    // va a servir para VentanaCambiarEstado
+    public String toString2(){
+    return "- " + this.nombreAnimal + " (" + this.codigo + ")   " + "[" + this.estado.toUpperCase() + "]";
+    }
+    
     public String getCodigo() {
         return codigo;
     }

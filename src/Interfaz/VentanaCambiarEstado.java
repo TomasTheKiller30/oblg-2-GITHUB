@@ -1,20 +1,35 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Interfaz;
+
+import Dominio.*;
+import java.awt.Color;
+import java.awt.Component;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author tomas
  */
-public class VentanaCambiarEstado extends javax.swing.JPanel {
-
+public class VentanaCambiarEstado extends javax.swing.JFrame {
+    
+    private Sistema modelo;
+    
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VentanaCambiarEstado.class.getName());
     /**
      * Creates new form VentanaCambiarEstado
      */
-    public VentanaCambiarEstado() {
+    public VentanaCambiarEstado (Sistema modelo) {
+        
+        this.modelo = modelo;
         initComponents();
+        cargarListas();
+        configurarColores();
     }
 
     /**
@@ -26,19 +41,106 @@ public class VentanaCambiarEstado extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 525, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 418, Short.MAX_VALUE)
-        );
+        jMenuItem1 = new javax.swing.JMenuItem();
+        btnCambiarEstado = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listaAnimales = new javax.swing.JList<>();
+        labelTituloListaAnimales = new javax.swing.JLabel();
+        labelCambiarEstado = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+
+        jMenuItem1.setText("jMenuItem1");
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(331, 490));
+        setMinimumSize(new java.awt.Dimension(331, 490));
+        setPreferredSize(new java.awt.Dimension(331, 490));
+        setResizable(false);
+        getContentPane().setLayout(null);
+
+        btnCambiarEstado.setBackground(new java.awt.Color(255, 255, 204));
+        btnCambiarEstado.setForeground(new java.awt.Color(204, 102, 0));
+        btnCambiarEstado.setText("Cambiar Estado");
+        btnCambiarEstado.addActionListener(this::btnCambiarEstadoActionPerformed);
+        getContentPane().add(btnCambiarEstado);
+        btnCambiarEstado.setBounds(90, 400, 140, 23);
+
+        listaAnimales.setSelectionBackground(new java.awt.Color(217, 239, 255));
+        jScrollPane1.setViewportView(listaAnimales);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(36, 80, 250, 310);
+
+        labelTituloListaAnimales.setText("Animales");
+        getContentPane().add(labelTituloListaAnimales);
+        labelTituloListaAnimales.setBounds(40, 60, 62, 16);
+
+        labelCambiarEstado.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        labelCambiarEstado.setText("Cambiar Estado");
+        labelCambiarEstado.setToolTipText("");
+        getContentPane().add(labelCambiarEstado);
+        labelCambiarEstado.setBounds(10, 10, 130, 25);
+
+        jSeparator2.setForeground(new java.awt.Color(153, 153, 153));
+        getContentPane().add(jSeparator2);
+        jSeparator2.setBounds(0, 40, 330, 10);
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cargarListas(){
+        listaAnimales.setListData(modelo.AnimalesParaAdoptar());
+    }
+    
+    //Se usa para mostrar los colores por primera vez y recargarlos mas adelante
+    private void configurarColores() {
+        
+        listaAnimales.setCellRenderer(new DefaultListCellRenderer() {
+
+            @Override
+            public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                // Se agarra el Jlabel / renglón
+                JLabel renglon = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+
+                //se agarra el perro del renglón
+                Animal a = (Animal) value;
+
+                // Escribimos código, nombre con el toString overrideado.
+                renglon.setText(a.toString2());
+
+                // Se cambia el 
+                if (a.getEstado().equals("Disponible")) {
+                    renglon.setForeground(Color.GREEN.darker()); // Verde
+                } else if (a.getEstado().equals("No Disponible")) {
+                    renglon.setForeground(Color.RED.darker()); // Rojo
+                }
+                return renglon;
+            }
+        });
+    }
+    
+    private void btnCambiarEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarEstadoActionPerformed
+        
+        Animal a = this.listaAnimales.getSelectedValue();
+        int posicion = this.listaAnimales.getSelectedIndex();
+        
+        if (a == null) {
+            JOptionPane.showMessageDialog(this, "No se ha elegido una animal", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        } else {
+            this.modelo.intercambiarEstado(a); // está en Dominio -> Metodos de Animal
+            cargarListas();
+            this.listaAnimales.setSelectedIndex(posicion); //la vuelve a dejar marcada
+        }
+    }//GEN-LAST:event_btnCambiarEstadoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCambiarEstado;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel labelCambiarEstado;
+    private javax.swing.JLabel labelTituloListaAnimales;
+    private javax.swing.JList<Animal> listaAnimales;
     // End of variables declaration//GEN-END:variables
 }

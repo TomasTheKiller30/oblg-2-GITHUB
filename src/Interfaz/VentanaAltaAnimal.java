@@ -16,9 +16,7 @@ public class VentanaAltaAnimal extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VentanaAltaAnimal.class.getName());
     private Sistema modelo; // Recordar: "Modelo" solo es un PUNTERO que hace referencia al "sys" que armamos en el Main. Nada mas.
-    /**
-     * Creates new form VentanaAltaAnimal
-     */
+    
     public VentanaAltaAnimal(Sistema unSistema) {
         this.modelo = unSistema;
         initComponents();
@@ -46,7 +44,11 @@ public class VentanaAltaAnimal extends javax.swing.JFrame {
         labelAlfanumerico1 = new javax.swing.JLabel();
         labelNombre = new javax.swing.JLabel();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setLocationByPlatform(true);
+        setMinimumSize(new java.awt.Dimension(473, 340));
+        setResizable(false);
         getContentPane().setLayout(null);
 
         labelTitulo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N

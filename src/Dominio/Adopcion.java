@@ -23,7 +23,11 @@ public class Adopcion implements Serializable {
     this.familia = unaFamilia;
     this.comentario = unComentario;
     }
-
+    
+    @Override
+    public String toString(){
+        return "- " + "Familia: " + getFamilia().getApellido() + " (" + getFamilia().getCedula() + ")  " + "Animal: " + getAnimal().getNombreAnimal() + " ("+ getAnimal().getCodigo() +")";
+    }
     public Animal getAnimal() {
         return animal;
     }

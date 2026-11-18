@@ -53,8 +53,8 @@ public class VentanaRealizarAdopcion extends javax.swing.JFrame {
         labelMostrarTemperamento = new javax.swing.JLabel();
         labelMostrarPeso = new javax.swing.JLabel();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(720, 600));
-        setPreferredSize(new java.awt.Dimension(720, 580));
         setResizable(false);
         setSize(new java.awt.Dimension(720, 600));
         getContentPane().setLayout(null);
@@ -68,23 +68,25 @@ public class VentanaRealizarAdopcion extends javax.swing.JFrame {
         btnAceptarAdopcion.setText("Aceptar");
         btnAceptarAdopcion.addActionListener(this::btnAceptarAdopcionActionPerformed);
         getContentPane().add(btnAceptarAdopcion);
-        btnAceptarAdopcion.setBounds(20, 510, 100, 23);
+        btnAceptarAdopcion.setBounds(90, 350, 100, 23);
 
         labelComentarios.setText("Comentarios:");
         getContentPane().add(labelComentarios);
-        labelComentarios.setBounds(310, 390, 71, 16);
+        labelComentarios.setBounds(310, 390, 100, 16);
 
         listaAnimales.setToolTipText("");
+        listaAnimales.setSelectionBackground(new java.awt.Color(235, 247, 255));
         listaAnimales.addListSelectionListener(this::listaAnimalesValueChanged);
         jScrollPane1.setViewportView(listaAnimales);
 
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(310, 90, 170, 280);
 
-        labelAnimales.setText("Animales:");
+        labelAnimales.setText("Animales (disponibles):");
         getContentPane().add(labelAnimales);
-        labelAnimales.setBounds(310, 70, 52, 16);
+        labelAnimales.setBounds(310, 70, 130, 16);
 
+        listaFamilias.setSelectionBackground(new java.awt.Color(235, 247, 255));
         jScrollPane2.setViewportView(listaFamilias);
 
         getContentPane().add(jScrollPane2);
@@ -100,9 +102,9 @@ public class VentanaRealizarAdopcion extends javax.swing.JFrame {
         getContentPane().add(labelTitulo);
         labelTitulo.setBounds(10, 10, 140, 20);
 
-        labelFamilias.setText("Familias");
+        labelFamilias.setText("Familias:");
         getContentPane().add(labelFamilias);
-        labelFamilias.setBounds(510, 70, 50, 16);
+        labelFamilias.setBounds(510, 70, 60, 16);
 
         panelInfo.setBorder(javax.swing.BorderFactory.createTitledBorder("INFO"));
 
@@ -184,32 +186,34 @@ public class VentanaRealizarAdopcion extends javax.swing.JFrame {
 
     //hace que se muestren los arraylist en los Jlist
     private void cargarListas(){
-        listaAnimales.setListData(modelo.getAnimalesDisponibles().toArray(new Animal[0]));
-        listaFamilias.setListData(modelo.getListaFamilias().toArray(new Familia[0]));
+        
+        listaAnimales.setListData(modelo.animalesDisponibles());
+        listaFamilias.setListData(modelo.familiasDisponibles());
     }
     
     // valida y registra en el arraylist
     private void btnAceptarAdopcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarAdopcionActionPerformed
-       Animal animalElegido = listaAnimales.getSelectedValue();
+        Animal animalElegido = listaAnimales.getSelectedValue();
         Familia familiaElegida = listaFamilias.getSelectedValue();
         String comentarios = labelComentarios.getText().trim();
         
         //validacion
         
         if (animalElegido == null){
-            JOptionPane.showMessageDialog(null, "No se ha elegido un animal, intente devuelta", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "No se ha elegido un animal, intente devuelta", "Advertencia", JOptionPane.WARNING_MESSAGE);
         }
         else if ( familiaElegida == null){
-            JOptionPane.showMessageDialog(null, "No se ha elegido una familia, intente devuelta", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "No se ha elegido una familia, intente devuelta", "Advertencia", JOptionPane.WARNING_MESSAGE);
         }
         else if (comentarios.isEmpty()){ // ya se le hizo el .trim() mas arriba
-            JOptionPane.showMessageDialog(null, "No se han escrito comentarios", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "No se han escrito comentarios", "Advertencia", JOptionPane.WARNING_MESSAGE);
         }
         else {
             
             modelo.realizarAdopcion(animalElegido, familiaElegida, comentarios);
-            JOptionPane.showMessageDialog(null, "", "Adopción realizada con éxitos", JOptionPane.INFORMATION_MESSAGE);
-            this.dispose(); //cierra esa ventana
+            JOptionPane.showMessageDialog(this, "", "Adopción realizada con éxitos", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+            cargarListas(); // recarga
         }
     }//GEN-LAST:event_btnAceptarAdopcionActionPerformed
 
