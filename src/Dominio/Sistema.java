@@ -5,6 +5,8 @@
 package Dominio;
 
 //no borrar
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.*;
 import java.nio.*;
 import java.io.*;
@@ -20,6 +22,9 @@ public class Sistema implements Serializable{
     public ArrayList<Empresa> listaEmpresas = new ArrayList<>();
     public ArrayList<Familia> listaFamilias = new ArrayList<>();
     
+    public PropertyChangeSupport manejador;
+    
+    
     //constructor de Sistema
     public Sistema (){
     this.listaAdopciones = new ArrayList<>();
@@ -27,6 +32,8 @@ public class Sistema implements Serializable{
     this.listaDonaciones = new ArrayList<>();
     this.listaEmpresas = new ArrayList<>();
     this.listaFamilias = new ArrayList<>();
+    
+    manejador = new PropertyChangeSupport(this);
     }
     
     
@@ -72,6 +79,10 @@ public class Sistema implements Serializable{
         }
     }
     
+    // parte de Patron Observer
+    public void agregarSubscriptor(PropertyChangeListener observer){
+        manejador.addPropertyChangeListener( observer);
+    }
     
     
     
@@ -134,6 +145,8 @@ public class Sistema implements Serializable{
         Adopcion A = new Adopcion(unAnimal, unaFamilia, unComentario);
         getListaAdopciones().add(A);
         unAnimal.setEstado("Entregado a Familia");
+        
+         
     }
     
     // se usa en ventanaAnularAdopcion()
@@ -236,8 +249,7 @@ public class Sistema implements Serializable{
     // devuelve un Array simple de todas las familias (se usa en Listas)
     public Familia[] familiasDisponibles() {
         
-         ArrayList<Familia> l = new ArrayList<>(getListaFamilias());
-         
+        ArrayList<Familia> l = new ArrayList<>(getListaFamilias()); 
         return l.toArray(new Familia[0]);
     }
 }

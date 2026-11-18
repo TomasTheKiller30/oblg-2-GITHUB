@@ -110,9 +110,9 @@ public class VentanaCambiarEstado extends javax.swing.JFrame {
 
                 // Se cambia el 
                 if (a.getEstado().equals("Disponible")) {
-                    renglon.setForeground(Color.GREEN.darker()); // Verde
+                    renglon.setBackground(Color.GREEN); // Verde
                 } else if (a.getEstado().equals("No Disponible")) {
-                    renglon.setForeground(Color.RED.darker()); // Rojo
+                    renglon.setBackground(Color.RED); // Rojo
                 }
                 return renglon;
             }

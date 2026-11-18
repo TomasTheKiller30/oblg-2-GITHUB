@@ -4,6 +4,7 @@
  */
 package Dominio;
 
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 
 /**
@@ -17,6 +18,7 @@ public class Animal implements Serializable {
     private String temperamento;
     private Double peso;
     private String estado;
+    
     
     public Animal (String unCodigo, String unNombreAnimal, String unTemperamento, Double unPeso, String unEstado){
         this.codigo = unCodigo;
