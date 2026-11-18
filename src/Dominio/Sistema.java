@@ -63,6 +63,10 @@ public class Sistema implements Serializable{
             this.listaEmpresas = sistemaRecuperado.listaEmpresas;
             this.listaFamilias = sistemaRecuperado.listaFamilias;
             
+            // Franco: Agregue esto porque proximoNumeroDonacion es atributo de instancia, necesitamos recuperarlo.
+            
+            this.proximoNumeroDonacion = sistemaRecuperado.proximoNumeroDonacion;
+            
             // 4. Cerramos el flujo de lectura del archivo[cite: 12]
             input.close();
             
@@ -146,19 +150,63 @@ public class Sistema implements Serializable{
     }
     
     // Metodos de Donacion.
+    
+    private int proximoNumeroDonacion = 1;
+
+    public int getProximoNumeroDonacion() {
+        return proximoNumeroDonacion;
+    }
+    
+    public int registrarDonacion(Empresa empresa, int tipo, int kilos) {
+        int numero = proximoNumeroDonacion;
+        listaDonaciones.add(new Donacion(numero, empresa, tipo, kilos));
+        proximoNumeroDonacion++;
+        return numero;
+    }
+
+    public boolean esTipoValido(int tipo) {
+        return tipo >= 1 && tipo <= 4;
+    }
+
+    // Devuelve -1 si el texto no es un entero; sirve para validar en ventana e importación
+    public int convertirEntero(String texto) {
+        int numero = -1;
+        try {
+            numero = Integer.parseInt(texto.trim());
+        } 
+        catch (NumberFormatException e) {
+            numero = -1;
+        }
+        return numero;
+    }
+
+    public int stockAlimento(int tipo) {
+        int total = 0;
+        for (int i = 0; i < listaDonaciones.size(); i++) {
+            if (listaDonaciones.get(i).getTipoAlimento() == tipo) {
+                total = total + listaDonaciones.get(i).getCantidadKilos();
+            }
+        }
+        return total;
+    }
+    
 
     // Metodos de Empresa.
 
     //Devuelve true si la empresa ya existe según su rut
-    public boolean existeEmpresa(String rutEmpresa){
-        boolean existe = false;
-        for (int i = 0 ; i < getListaEmpresas().size() && !existe; i++){
-            String rutRegistrado = getListaEmpresas().get(i).getRut();
-            if ( rutRegistrado.equals(rutEmpresa)){
-                existe = true;
+    
+    public Empresa buscarEmpresa(String rutIng) {
+        Empresa encontrada = null;
+        for (int i = 0; i < listaEmpresas.size() && encontrada == null; i++) {
+            if (listaEmpresas.get(i).getRut().equals(rutIng)) {
+                encontrada = listaEmpresas.get(i);
             }
         }
-        return existe;
+        return encontrada;
+    }
+
+    public boolean existeEmpresa(String rutIng) {
+        return buscarEmpresa(rutIng) != null;
     }
 
     public void registrarEmpresa(String unNombreEmpresa, String unRut, String unaDireccion){

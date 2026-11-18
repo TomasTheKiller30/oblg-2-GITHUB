@@ -11,10 +11,12 @@ import java.io.Serializable;
 public class Donacion implements Serializable {
     
     private Empresa empresa;
+    private int numeroDonacion;
     private int tipoAlimento;
     private int cantidadKilos;
     
-    public Donacion (Empresa unaEmpresa, int unTipoAlimento, int unaCantidadKilos){
+    public Donacion (int unNumero, Empresa unaEmpresa, int unTipoAlimento, int unaCantidadKilos){
+        this.numeroDonacion = unNumero;
         this.empresa = unaEmpresa;
         this.tipoAlimento = unTipoAlimento;
         this.cantidadKilos = unaCantidadKilos;
@@ -26,6 +28,10 @@ public class Donacion implements Serializable {
 
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
+    }
+    
+    public int getNumeroDonacion() {
+        return numeroDonacion;        
     }
 
     public int getTipoAlimento() {
@@ -42,6 +48,23 @@ public class Donacion implements Serializable {
 
     public void setCantidadKilos(int cantidadKilos) {
         this.cantidadKilos = cantidadKilos;
+    }
+
+    public String getNombreTipo() {
+    String nombre = "Otra";
+    if (tipoAlimento == 1) {
+        nombre = "Perros grandes";
+    } else if (tipoAlimento == 2) {
+        nombre = "Perros chicos";
+    } else if (tipoAlimento == 3) {
+        nombre = "Perros adultos";
+    }
+    return nombre;
+    }
+
+    @Override
+    public String toString() {
+        return "Nº " + numeroDonacion + " - " + empresa.getNombreEmpresa() + " - " + getNombreTipo() + " - " + cantidadKilos + " kg";
     }
     
 }

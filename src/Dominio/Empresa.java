@@ -42,4 +42,10 @@ public class Empresa implements Serializable {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
+    
+    @Override
+    public String toString() {
+        return nombreEmpresa + " (RUT " + rut + ")";
+    }
+    
 }
