@@ -16,9 +16,7 @@ public class VentanaAltaAnimal extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VentanaAltaAnimal.class.getName());
     private Sistema modelo; // Recordar: "Modelo" solo es un PUNTERO que hace referencia al "sys" que armamos en el Main. Nada mas.
-    /**
-     * Creates new form VentanaAltaAnimal
-     */
+    
     public VentanaAltaAnimal(Sistema unSistema) {
         this.modelo = unSistema;
         initComponents();
@@ -39,12 +37,18 @@ public class VentanaAltaAnimal extends javax.swing.JFrame {
         txtNombre = new javax.swing.JTextField();
         txtTemperamento = new javax.swing.JTextField();
         txtPeso = new javax.swing.JTextField();
-        labelAlfanumerico = new javax.swing.JLabel();
+        labelTemperamento = new javax.swing.JLabel();
         labelKilos = new javax.swing.JLabel();
         comboBoxEstado = new javax.swing.JComboBox<>();
         btnAceptar = new javax.swing.JButton();
+        labelAlfanumerico1 = new javax.swing.JLabel();
+        labelNombre = new javax.swing.JLabel();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setLocationByPlatform(true);
+        setMinimumSize(new java.awt.Dimension(473, 340));
+        setResizable(false);
         getContentPane().setLayout(null);
 
         labelTitulo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -58,40 +62,35 @@ public class VentanaAltaAnimal extends javax.swing.JFrame {
         jSeparator1.setBounds(0, 40, 480, 10);
 
         txtCodigo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtCodigo.setText("Código...");
         getContentPane().add(txtCodigo);
         txtCodigo.setBounds(30, 70, 120, 22);
 
         txtNombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtNombre.setText("Nombre...");
         getContentPane().add(txtNombre);
         txtNombre.setBounds(30, 110, 120, 22);
 
         txtTemperamento.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtTemperamento.setText("Temperamento...");
         getContentPane().add(txtTemperamento);
         txtTemperamento.setBounds(30, 150, 120, 22);
 
         txtPeso.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtPeso.setText("Peso...");
         getContentPane().add(txtPeso);
         txtPeso.setBounds(30, 190, 120, 22);
 
-        labelAlfanumerico.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        labelAlfanumerico.setForeground(new java.awt.Color(153, 153, 153));
-        labelAlfanumerico.setText("(Código Alfanumérico)");
-        getContentPane().add(labelAlfanumerico);
-        labelAlfanumerico.setBounds(160, 80, 110, 14);
+        labelTemperamento.setForeground(new java.awt.Color(51, 51, 51));
+        labelTemperamento.setText("(Temperamento)");
+        getContentPane().add(labelTemperamento);
+        labelTemperamento.setBounds(160, 160, 110, 16);
 
-        labelKilos.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        labelKilos.setForeground(new java.awt.Color(153, 153, 153));
+        labelKilos.setForeground(new java.awt.Color(51, 51, 51));
         labelKilos.setText("(kg)");
         getContentPane().add(labelKilos);
-        labelKilos.setBounds(160, 200, 20, 14);
+        labelKilos.setBounds(160, 200, 30, 16);
 
         comboBoxEstado.setBackground(new java.awt.Color(236, 236, 236));
-        comboBoxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elegir Estado", "No Disponible para Adoptar", "Disponible para Adoptar", "En Proceso de Adopción" }));
+        comboBoxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elegir Estado", "No Disponible", "Disponible", "En Proceso" }));
         comboBoxEstado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        comboBoxEstado.setInheritsPopupMenu(true);
         comboBoxEstado.addActionListener(this::comboBoxEstadoActionPerformed);
         getContentPane().add(comboBoxEstado);
         comboBoxEstado.setBounds(30, 260, 170, 22);
@@ -102,6 +101,16 @@ public class VentanaAltaAnimal extends javax.swing.JFrame {
         btnAceptar.addActionListener(this::btnAceptarActionPerformed);
         getContentPane().add(btnAceptar);
         btnAceptar.setBounds(300, 260, 100, 23);
+
+        labelAlfanumerico1.setForeground(new java.awt.Color(51, 51, 51));
+        labelAlfanumerico1.setText("(Código Alfanumérico)");
+        getContentPane().add(labelAlfanumerico1);
+        labelAlfanumerico1.setBounds(160, 80, 130, 16);
+
+        labelNombre.setForeground(new java.awt.Color(51, 51, 51));
+        labelNombre.setText("(Nombre)");
+        getContentPane().add(labelNombre);
+        labelNombre.setBounds(160, 120, 60, 16);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -115,34 +124,33 @@ public class VentanaAltaAnimal extends javax.swing.JFrame {
         String codigo = txtCodigo.getText().trim();
         String nombre = txtNombre.getText().trim();
         String temperamento = txtTemperamento.getText().trim();
-        String peso = txtPeso.getText().trim();
-        
+        String pesoTexto = txtPeso.getText().trim();
         String estadoSeleccionado = (String) comboBoxEstado.getSelectedItem();
-        
-        boolean ingValido = false;
-            
-        if (codigo.isEmpty() || nombre.isEmpty() || temperamento.isEmpty() || peso.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Debe completar todos los campos obligatorios.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-        }
-        else if (estadoSeleccionado.equals("Elegir Estado")){
-            javax.swing.JOptionPane.showMessageDialog(this, "Debe determinar el estado del animal.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);   
-        }
-        double pesoEnDouble = Double.parseDouble(peso);
-        try {
-            if (pesoEnDouble <= 0) {
-                javax.swing.JOptionPane.showMessageDialog(this, "El peso debe ser un número mayor a cero.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-            }
-        } catch(NumberFormatException e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Ingrese un número", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-        }
-        
-        if (modelo.existeAnimal(codigo)){
-            javax.swing.JOptionPane.showMessageDialog(this, "el código de " + nombre + " ("+codigo+") Ya se encuentra registrado. Intente Otro.", "Advertencia", javax.swing.JOptionPane.WARNING_MESSAGE);     
-        }
 
-        if (ingValido){
-            modelo.registrarAnimal(codigo, nombre, temperamento, pesoEnDouble, estadoSeleccionado);
-            javax.swing.JOptionPane.showMessageDialog(this, "Se registró el perro " + nombre + " ("+codigo+") "+peso+"kg ", "Registrado con exitos!", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        // 1. Validar campos vacíos y selección del combo
+        if (codigo.isEmpty() || nombre.isEmpty() || temperamento.isEmpty() || pesoTexto.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Debe completar todos los campos obligatorios.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        } else if (estadoSeleccionado.equals("Elegir Estado")) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Debe determinar el estado del animal.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        } else if (modelo.existeAnimal(codigo)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "El código " + codigo + " ya se encuentra registrado. Intente otro.", "Advertencia", javax.swing.JOptionPane.WARNING_MESSAGE);
+        } else {
+            // si todo esta bien, se convierte el peso
+            try {
+                double pesoEnDouble = Double.parseDouble(pesoTexto);
+
+                if (pesoEnDouble <= 0) {
+                    javax.swing.JOptionPane.showMessageDialog(this, "El peso debe ser un número mayor a cero.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                } else {
+                    // se registra
+                    
+                    modelo.registrarAnimal(codigo, nombre, temperamento, pesoEnDouble, estadoSeleccionado);
+                    javax.swing.JOptionPane.showMessageDialog(this, "Se registró el perro " + nombre + " (" + codigo + ") " + pesoEnDouble + " kg", "Registrado con éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                    this.dispose(); // Cierra la ventana tras guardar
+                }
+            } catch (NumberFormatException e) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Ingrese un número válido en el peso.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
         }
     }//GEN-LAST:event_btnAceptarActionPerformed
 
@@ -151,8 +159,10 @@ public class VentanaAltaAnimal extends javax.swing.JFrame {
     private javax.swing.JButton btnAceptar;
     private javax.swing.JComboBox<String> comboBoxEstado;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel labelAlfanumerico;
+    private javax.swing.JLabel labelAlfanumerico1;
     private javax.swing.JLabel labelKilos;
+    private javax.swing.JLabel labelNombre;
+    private javax.swing.JLabel labelTemperamento;
     private javax.swing.JLabel labelTitulo;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtNombre;

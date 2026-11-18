@@ -4,6 +4,7 @@
  */
 package Dominio;
 
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 
 /**
@@ -18,6 +19,7 @@ public class Animal implements Serializable {
     private Double peso;
     private String estado;
     
+    
     public Animal (String unCodigo, String unNombreAnimal, String unTemperamento, Double unPeso, String unEstado){
         this.codigo = unCodigo;
         this.nombreAnimal = unNombreAnimal;
@@ -25,6 +27,16 @@ public class Animal implements Serializable {
         this.peso = unPeso;
         this.estado = unEstado;
         
+    }
+    
+    @Override
+    public String toString(){
+    return this.nombreAnimal + " (" + this.codigo + ")";
+    }
+    
+    // va a servir para VentanaCambiarEstado
+    public String toString2(){
+    return "- " + this.nombreAnimal + " (" + this.codigo + ")   " + "[" + this.estado.toUpperCase() + "]";
     }
     
     public String getCodigo() {

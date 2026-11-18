@@ -8,6 +8,8 @@ import java.io.Serializable;
  *
  * @author Tomas
  */
+
+
 public class Familia implements Serializable {
     private String cedula;
     private String apellido;
@@ -22,7 +24,12 @@ public class Familia implements Serializable {
     public String getCedula() {
         return cedula;
     }
-
+    
+    @Override
+    public String toString() {
+        return this.apellido + " (CI: " + this.cedula + ")";
+    }
+    
     public void setCedula(String cedula) {
         this.cedula = cedula;
     }

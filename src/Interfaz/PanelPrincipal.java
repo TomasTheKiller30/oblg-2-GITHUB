@@ -79,6 +79,8 @@ public class PanelPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Refugio de perros");
         setBackground(new java.awt.Color(225, 237, 187));
+        setPreferredSize(new java.awt.Dimension(580, 420));
+        setResizable(false);
         getContentPane().setLayout(null);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Resumen del refugio"));
@@ -140,14 +142,11 @@ public class PanelPrincipal extends javax.swing.JFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))))
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -192,7 +191,7 @@ public class PanelPrincipal extends javax.swing.JFrame {
                     .addComponent(resumen_Empresas))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(resumen_AlimentoGrandes))
@@ -206,9 +205,9 @@ public class PanelPrincipal extends javax.swing.JFrame {
                     .addComponent(resumen_AlimentoAdultos))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(resumen_AlimentoOtro))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(resumen_AlimentoOtro)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1);
@@ -269,12 +268,27 @@ public class PanelPrincipal extends javax.swing.JFrame {
         menuMovimientos.setText("Movimientos");
 
         m_m_RealizarAdopcion.setText("Realizar adopción");
+        m_m_RealizarAdopcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                m_m_RealizarAdopcionActionPerformed(evt);
+            }
+        });
         menuMovimientos.add(m_m_RealizarAdopcion);
 
         m_m_CambiarDeEstado.setText("Cambiar de estado");
+        m_m_CambiarDeEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                m_m_CambiarDeEstadoActionPerformed(evt);
+            }
+        });
         menuMovimientos.add(m_m_CambiarDeEstado);
 
         m_m_AnularAdopcion.setText("Anular adopción");
+        m_m_AnularAdopcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                m_m_AnularAdopcionActionPerformed(evt);
+            }
+        });
         menuMovimientos.add(m_m_AnularAdopcion);
 
         m_m_RegistrarDonacion.setText("Registrar donación");
@@ -317,6 +331,20 @@ public class PanelPrincipal extends javax.swing.JFrame {
         ventanaAlta.setVisible(true);
     }//GEN-LAST:event_m_a_AnimalesActionPerformed
 
+    private void m_m_RealizarAdopcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_m_RealizarAdopcionActionPerformed
+        VentanaRealizarAdopcion ventanaAlta = new VentanaRealizarAdopcion(this.modelo);
+        ventanaAlta.setVisible(true);
+    }//GEN-LAST:event_m_m_RealizarAdopcionActionPerformed
+
+    private void m_m_CambiarDeEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_m_CambiarDeEstadoActionPerformed
+        VentanaCambiarEstado ventanaAlta = new VentanaCambiarEstado(this.modelo);
+        ventanaAlta.setVisible(true);
+    }//GEN-LAST:event_m_m_CambiarDeEstadoActionPerformed
+
+    private void m_m_AnularAdopcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_m_AnularAdopcionActionPerformed
+        VentanaAnularAdopcion ventanaAlta = new VentanaAnularAdopcion(this.modelo);
+        ventanaAlta.setVisible(true);
+    }//GEN-LAST:event_m_m_AnularAdopcionActionPerformed
     private void m_a_FamiliasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_a_FamiliasActionPerformed
         VentanaAltaFamilia ventanaAlta2 = new VentanaAltaFamilia(this.modelo);
         ventanaAlta2.setVisible(true);

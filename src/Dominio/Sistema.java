@@ -5,6 +5,8 @@
 package Dominio;
 
 //no borrar
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.*;
 import java.nio.*;
 import java.io.*;
@@ -20,6 +22,9 @@ public class Sistema implements Serializable{
     public ArrayList<Empresa> listaEmpresas = new ArrayList<>();
     public ArrayList<Familia> listaFamilias = new ArrayList<>();
     
+    public PropertyChangeSupport manejador;
+    
+    
     //constructor de Sistema
     public Sistema (){
     this.listaAdopciones = new ArrayList<>();
@@ -27,6 +32,8 @@ public class Sistema implements Serializable{
     this.listaDonaciones = new ArrayList<>();
     this.listaEmpresas = new ArrayList<>();
     this.listaFamilias = new ArrayList<>();
+    
+    manejador = new PropertyChangeSupport(this);
     }
     
     
@@ -76,6 +83,10 @@ public class Sistema implements Serializable{
         }
     }
     
+    // parte de Patron Observer
+    public void agregarSubscriptor(PropertyChangeListener observer){
+        manejador.addPropertyChangeListener( observer);
+    }
     
     
     
@@ -123,9 +134,40 @@ public class Sistema implements Serializable{
     
     
     // Metodos de Adopcion.
+   
+    public void realizarAdopcion(Animal unAnimal, Familia unaFamilia, String unComentario){
+        Adopcion A = new Adopcion(unAnimal, unaFamilia, unComentario);
+        getListaAdopciones().add(A);
+        unAnimal.setEstado("Entregado a Familia");
         
-    // Metodos de Animal.
+         
+    }
     
+    // se usa en ventanaAnularAdopcion()
+    public Adopcion[] adopcionesDisponibles(){
+        
+        ArrayList<Adopcion> l = new ArrayList<>(getListaAdopciones());
+        return l.toArray(new Adopcion[0]);
+    
+    }
+    
+    // Elimina la adopcion del listaAdopciones y remueve su estado de "Entregado a Familia" a "Disponible"
+    public void anularAdopcion(Adopcion unaAdopcion){
+        
+        boolean encontrada = false;
+        
+        for (int i = 0; i < getListaAdopciones().size() && encontrada == false; i++){
+            Adopcion a = getListaAdopciones().get(i); 
+            if (a.equals(unaAdopcion)){ // verifica si existe 
+                encontrada = true;
+                getListaAdopciones().remove(i);
+                
+            }
+        }
+    }
+    
+    
+    // Metodos de Animal.
     
     //Devuelve true o false si el animal (por código) ya existe. PARA VALIDACIONES
     public boolean existeAnimal(String codigoIng){
@@ -147,6 +189,46 @@ public class Sistema implements Serializable{
             this.listaAnimales.add(A);
         }
     
+    }
+    
+    // se usa en listas, agarra el ArrayList, filtra por disponibles y devuelve un Array[] no un ArrayList
+    public Animal[] animalesDisponibles(){
+
+        ArrayList<Animal> l = new ArrayList<>();
+
+        for (int i = 0; i < getListaAnimales().size() ; i++ ){
+            Animal a = getListaAnimales().get(i);
+            if (a.getEstado().equals("Disponible")){
+            l.add(a);
+            }
+        }
+    return l.toArray(new Animal[0]);
+    } 
+    
+    
+    // hace lo mismo que AnimalesDisponibles, pero devuelve el array simple de todos los animales que no estan en un proceso de adopción
+    public Animal[] AnimalesParaAdoptar() {
+        ArrayList<Animal> l = new ArrayList<>();
+
+        for (int i = 0; i < getListaAnimales().size() ; i++ ){
+            Animal a = getListaAnimales().get(i);
+            if (a.getEstado().equals("Disponible") || a.getEstado().equals("No Disponible")){
+            l.add(a);
+            }
+        }
+    return l.toArray(new Animal[0]);
+    }
+    
+    public void intercambiarEstado(Animal unAnimal) {
+        if (unAnimal != null) {
+            String estadoActual = unAnimal.getEstado();
+
+            if (estadoActual.equals("Disponible")) {
+                unAnimal.setEstado("No Disponible");
+            } else if (estadoActual.equals("No Disponible")) {
+                unAnimal.setEstado("Disponible");
+            }
+        }
     }
     
     // Metodos de Donacion.
@@ -239,4 +321,15 @@ public class Sistema implements Serializable{
     
     }
     
+    
+    
+    
+    // Metodos de Familia.
+    
+    // devuelve un Array simple de todas las familias (se usa en Listas)
+    public Familia[] familiasDisponibles() {
+        
+        ArrayList<Familia> l = new ArrayList<>(getListaFamilias()); 
+        return l.toArray(new Familia[0]);
+    }
 }
