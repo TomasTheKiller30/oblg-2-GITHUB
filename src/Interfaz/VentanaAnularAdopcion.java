@@ -82,7 +82,6 @@ public class VentanaAnularAdopcion extends javax.swing.JFrame {
         labelAnularAdopcion.setToolTipText("");
         getContentPane().add(labelAnularAdopcion);
         labelAnularAdopcion.setBounds(10, 10, 150, 25);
-        labelAnularAdopcion.getAccessibleContext().setAccessibleName("Anular Adopcion");
 
         labelTituloListaAdopciones.setText("Adopciones:");
         getContentPane().add(labelTituloListaAdopciones);

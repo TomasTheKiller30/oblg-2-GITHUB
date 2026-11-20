@@ -302,6 +302,11 @@ public class PanelPrincipal extends javax.swing.JFrame {
         menuVarios.setText("Varios");
 
         m_v_ConsultaFamilias.setText("Consulta de familias");
+        m_v_ConsultaFamilias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                m_v_ConsultaFamiliasActionPerformed(evt);
+            }
+        });
         menuVarios.add(m_v_ConsultaFamilias);
 
         m_v_ConsultaDonaciones.setText("Consulta de donaciones");
@@ -354,6 +359,11 @@ public class PanelPrincipal extends javax.swing.JFrame {
         VentanaAltaEmpresa ventanaAlta3 = new VentanaAltaEmpresa(this.modelo);
         ventanaAlta3.setVisible(true);
     }//GEN-LAST:event_m_a_EmpresasActionPerformed
+
+    private void m_v_ConsultaFamiliasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_v_ConsultaFamiliasActionPerformed
+        VentanaConsultaFamilia ventanaAlta = new VentanaConsultaFamilia(this.modelo);
+        ventanaAlta.setVisible(true);
+    }//GEN-LAST:event_m_v_ConsultaFamiliasActionPerformed
 
   
 // esto en gris es el initComponents();

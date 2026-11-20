@@ -13,12 +13,14 @@ import java.io.Serializable;
  * @author Tomas
  */
 public class Adopcion implements Serializable {
+    private int numeroAdopcion;
     private Animal animal;
     private Familia familia;
     private String comentario;
     
     
-    public Adopcion (Animal unAnimal, Familia unaFamilia, String unComentario){
+    public Adopcion (int unNumeroAdopcion, Animal unAnimal, Familia unaFamilia, String unComentario){
+    this.numeroAdopcion = unNumeroAdopcion;
     this.animal = unAnimal;
     this.familia = unaFamilia;
     this.comentario = unComentario;
@@ -52,5 +54,12 @@ public class Adopcion implements Serializable {
         this.comentario = comentario;
     }
     
+    public int getNumeroAdopcion(){
+        return numeroAdopcion;
+    }
+    
+    public void setNumeroAdopcion(int numero){
+        this.numeroAdopcion = numero;
+    }
     
 }

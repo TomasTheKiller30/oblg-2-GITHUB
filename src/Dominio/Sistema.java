@@ -40,30 +40,30 @@ public class Sistema implements Serializable{
     // parte de archivos y seria:
     public void guardarDatos() {
         try {
-            // 1. Instanciamos ObjectOutputStream y creamos el archivo "datos.ser" en la ruta del proyecto[cite: 11, 12]
+            
             ObjectOutputStream output = new ObjectOutputStream(Files.newOutputStream(Paths.get("datos.ser")));
 
-            // 2. Usamos writeObject enviando "this", lo que hace que toda tu clase Sistema (y sus listas) se guarde de un solo golpe[cite: 11]
+            
             output.writeObject(this);
 
-            // 3. Cerramos el archivo para liberar la memoria y asegurar que se guarde correctamente[cite: 11, 12]
+            
             output.close();
             System.out.println("DEBUG: guardarDatos() se ejecutó correctamente");
 
         } catch (IOException e) {
-            // 4. Si hay un problema de archivos, capturamos la excepción IOException[cite: 11, 12]
+            
             System.out.println("Error al guardar los datos del sistema");
         }
 }
     public void recuperarDatos() {
         try {
-            // 1. Instanciamos ObjectInputStream para leer el archivo "datos.ser"[cite: 12, 13]
+            
             ObjectInputStream input = new ObjectInputStream(Files.newInputStream(Paths.get("datos.ser")));
             
-            // 2. Leemos el objeto del archivo y lo "casteamos" a nuestra clase Sistema[cite: 12, 13]
+            
             Sistema sistemaRecuperado = (Sistema) input.readObject();
             
-            // 3. Reemplazamos las listas actuales vacías por las que estaban guardadas[cite: 6, 13]
+            
             this.listaAdopciones = sistemaRecuperado.listaAdopciones;
             this.listaAnimales = sistemaRecuperado.listaAnimales;
             this.listaDonaciones = sistemaRecuperado.listaDonaciones;
@@ -73,12 +73,13 @@ public class Sistema implements Serializable{
             // Franco: Agregue esto porque proximoNumeroDonacion es atributo de instancia, necesitamos recuperarlo.
             
             this.proximoNumeroDonacion = sistemaRecuperado.proximoNumeroDonacion;
+            this.proximoNumeroAdopcion = sistemaRecuperado.proximoNumeroAdopcion;
             
-            // 4. Cerramos el flujo de lectura del archivo[cite: 12]
+            
             input.close();
             
         } catch (IOException | ClassNotFoundException e) {
-            // 5. Capturamos los errores obligatorios si el archivo no existe o hay conflicto de clases[cite: 12, 13]
+            
             System.out.println("Error al recuperar los datos del sistema");
         }
     }
@@ -134,13 +135,21 @@ public class Sistema implements Serializable{
     
     
     // Metodos de Adopcion.
-   
-    public void realizarAdopcion(Animal unAnimal, Familia unaFamilia, String unComentario){
-        Adopcion A = new Adopcion(unAnimal, unaFamilia, unComentario);
+    
+    private int proximoNumeroAdopcion = 1;
+
+    public int getProximoNumeroAdopcion() {
+        return proximoNumeroAdopcion;
+    }
+    
+    // cuando se hace una adopcion se: registra en el arraylist y va sumando el número para que no se reutilice
+    public int realizarAdopcion(Animal unAnimal, Familia unaFamilia, String unComentario){
+        int n = proximoNumeroAdopcion;
+        Adopcion A = new Adopcion(n, unAnimal, unaFamilia, unComentario);
         getListaAdopciones().add(A);
         unAnimal.setEstado("Entregado a Familia");
-        
-         
+        proximoNumeroAdopcion++;
+        return n;      
     }
     
     // se usa en ventanaAnularAdopcion()
@@ -156,10 +165,11 @@ public class Sistema implements Serializable{
         
         boolean encontrada = false;
         
-        for (int i = 0; i < getListaAdopciones().size() && encontrada == false; i++){
+        for (int i = 0; i < getListaAdopciones().size() && !encontrada; i++){
             Adopcion a = getListaAdopciones().get(i); 
             if (a.equals(unaAdopcion)){ // verifica si existe 
                 encontrada = true;
+                unaAdopcion.getAnimal().setEstado("No Disponible");
                 getListaAdopciones().remove(i);
                 
             }
@@ -184,7 +194,7 @@ public class Sistema implements Serializable{
     
     public void registrarAnimal(String codigoIng, String nombreIng, String temperamentoIng, double pesoIng, String estadoIng){
         
-        if (existeAnimal(codigoIng) == false){ 
+        if (!existeAnimal(codigoIng)){ 
             Animal A = new Animal(codigoIng, nombreIng, temperamentoIng, pesoIng, estadoIng);
             this.listaAnimales.add(A);
         }
@@ -328,8 +338,47 @@ public class Sistema implements Serializable{
     
     // devuelve un Array simple de todas las familias (se usa en Listas)
     public Familia[] familiasDisponibles() {
-        
         ArrayList<Familia> l = new ArrayList<>(getListaFamilias()); 
         return l.toArray(new Familia[0]);
     }
-}
+    
+    public Familia[] familiasOrdenadasPorApellido(){
+    
+        ArrayList<Familia> l = new ArrayList<>(getListaFamilias());
+        
+        Collections.sort(l, new Comparator<Familia>() {
+            @Override
+            public int compare(Familia f1, Familia f2) {
+                return f1.getApellido().compareToIgnoreCase(f2.getApellido());
+            }
+        });
+        
+        return l.toArray(new Familia[0]);
+    }
+    
+    public int cantidadAdopcionesFamilia(Familia unaFamilia) {
+        int cant = 0;
+        for (int i = 0; i < getListaAdopciones().size(); i++) {
+            Familia f = getListaAdopciones().get(i).getFamilia();
+            if (f.equals(unaFamilia)) {
+                cant++;
+            }
+        }
+        return cant;
+    }
+    
+    public Familia[] familiasOrdenadasPorAdopciones() {
+        ArrayList<Familia> l = new ArrayList<>(getListaFamilias());
+
+        Collections.sort(l, new Comparator<Familia>() {
+            @Override
+            public int compare(Familia f1, Familia f2) {
+                int cant1 = cantidadAdopcionesFamilia(f1);
+                int cant2 = cantidadAdopcionesFamilia(f2);
+                return cant2 - cant1;
+            }
+        });
+
+        return l.toArray(Familia[]::new);
+    }
+}   

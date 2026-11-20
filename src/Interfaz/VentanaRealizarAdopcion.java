@@ -52,6 +52,8 @@ public class VentanaRealizarAdopcion extends javax.swing.JFrame {
         labelMostrarNombre = new javax.swing.JLabel();
         labelMostrarTemperamento = new javax.swing.JLabel();
         labelMostrarPeso = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        labelMostrarNumeroAdopcion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(720, 600));
@@ -68,7 +70,7 @@ public class VentanaRealizarAdopcion extends javax.swing.JFrame {
         btnAceptarAdopcion.setText("Aceptar");
         btnAceptarAdopcion.addActionListener(this::btnAceptarAdopcionActionPerformed);
         getContentPane().add(btnAceptarAdopcion);
-        btnAceptarAdopcion.setBounds(90, 350, 100, 23);
+        btnAceptarAdopcion.setBounds(90, 360, 100, 23);
 
         labelComentarios.setText("Comentarios:");
         getContentPane().add(labelComentarios);
@@ -127,6 +129,12 @@ public class VentanaRealizarAdopcion extends javax.swing.JFrame {
 
         labelMostrarPeso.setText("---");
 
+        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel1.setText("Numero de Adopcion:");
+
+        labelMostrarNumeroAdopcion.setForeground(new java.awt.Color(102, 102, 102));
+        labelMostrarNumeroAdopcion.setText("---");
+
         javax.swing.GroupLayout panelInfoLayout = new javax.swing.GroupLayout(panelInfo);
         panelInfo.setLayout(panelInfoLayout);
         panelInfoLayout.setHorizontalGroup(
@@ -134,32 +142,37 @@ public class VentanaRealizarAdopcion extends javax.swing.JFrame {
             .addGroup(panelInfoLayout.createSequentialGroup()
                 .addGroup(panelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelInfoLayout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(labelCodigo)
-                        .addGap(61, 61, 61)
-                        .addComponent(labelMostrarCodigo))
+                        .addGap(30, 30, 30)
+                        .addGroup(panelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(panelInfoLayout.createSequentialGroup()
+                                .addComponent(labelCodigo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(labelMostrarCodigo))
+                            .addGroup(panelInfoLayout.createSequentialGroup()
+                                .addGroup(panelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(labelTemperamento)
+                                    .addComponent(labelNombre)
+                                    .addComponent(labelTemperamento1))
+                                .addGap(51, 51, 51)
+                                .addGroup(panelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(labelMostrarPeso)
+                                    .addComponent(labelMostrarNombre)
+                                    .addComponent(labelMostrarTemperamento)))
+                            .addGroup(panelInfoLayout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(labelMostrarNumeroAdopcion))))
                     .addGroup(panelInfoLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(labelAnimalSeleccionado))
-                    .addGroup(panelInfoLayout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(panelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelTemperamento)
-                            .addComponent(labelNombre)
-                            .addComponent(labelTemperamento1))
-                        .addGap(18, 18, 18)
-                        .addGroup(panelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelMostrarPeso)
-                            .addComponent(labelMostrarNombre)
-                            .addComponent(labelMostrarTemperamento))))
-                .addContainerGap(89, Short.MAX_VALUE))
+                        .addComponent(labelAnimalSeleccionado)))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         panelInfoLayout.setVerticalGroup(
             panelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelInfoLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addContainerGap()
                 .addComponent(labelAnimalSeleccionado)
-                .addGap(20, 20, 20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelCodigo)
                     .addComponent(labelMostrarCodigo))
@@ -175,11 +188,15 @@ public class VentanaRealizarAdopcion extends javax.swing.JFrame {
                 .addGroup(panelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelTemperamento1)
                     .addComponent(labelMostrarPeso))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addGap(31, 31, 31)
+                .addGroup(panelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(labelMostrarNumeroAdopcion))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         getContentPane().add(panelInfo);
-        panelInfo.setBounds(20, 130, 240, 210);
+        panelInfo.setBounds(20, 130, 240, 220);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -195,8 +212,7 @@ public class VentanaRealizarAdopcion extends javax.swing.JFrame {
     private void btnAceptarAdopcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarAdopcionActionPerformed
         Animal animalElegido = listaAnimales.getSelectedValue();
         Familia familiaElegida = listaFamilias.getSelectedValue();
-        String comentarios = labelComentarios.getText().trim();
-        
+        String comentarios = textFieldComentarios.getText().trim();
         //validacion
         
         if (animalElegido == null){
@@ -210,7 +226,8 @@ public class VentanaRealizarAdopcion extends javax.swing.JFrame {
         }
         else {
             
-            modelo.realizarAdopcion(animalElegido, familiaElegida, comentarios);
+            // hace 2 cosas, guarda el numero y realiza la Adopción (aka, la guarda en el arrayList.)
+            int nro = modelo.realizarAdopcion(animalElegido, familiaElegida, comentarios);
             JOptionPane.showMessageDialog(this, "", "Adopción realizada con éxitos", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
             cargarListas(); // recarga
@@ -220,25 +237,26 @@ public class VentanaRealizarAdopcion extends javax.swing.JFrame {
     
     
     private void listaAnimalesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaAnimalesValueChanged
-        String codigo = labelMostrarCodigo.getText().trim();
-        String nombre = labelMostrarNombre.getText().trim();
-        String temperamento = labelMostrarTemperamento.getText().trim();
-        String pesoTexto = labelMostrarPeso.getText().trim();
-        
         Animal a = listaAnimales.getSelectedValue();
-        
-    
-        // por si la lista se recarga y se deseleccion
+
         if (a != null) {
             labelMostrarCodigo.setText(a.getCodigo());
             labelMostrarNombre.setText(a.getNombreAnimal());
             labelMostrarTemperamento.setText(a.getTemperamento());
             labelMostrarPeso.setText(String.valueOf(a.getPeso()));
+            labelMostrarNumeroAdopcion.setText(String.valueOf(modelo.getProximoNumeroAdopcion()));
+        } else {
+            labelMostrarCodigo.setText("---");
+            labelMostrarNombre.setText("---");
+            labelMostrarTemperamento.setText("---");
+            labelMostrarPeso.setText("---");
+            labelMostrarNumeroAdopcion.setText("---");
         }
     }//GEN-LAST:event_listaAnimalesValueChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptarAdopcion;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
@@ -249,6 +267,7 @@ public class VentanaRealizarAdopcion extends javax.swing.JFrame {
     private javax.swing.JLabel labelFamilias;
     private javax.swing.JLabel labelMostrarCodigo;
     private javax.swing.JLabel labelMostrarNombre;
+    private javax.swing.JLabel labelMostrarNumeroAdopcion;
     private javax.swing.JLabel labelMostrarPeso;
     private javax.swing.JLabel labelMostrarTemperamento;
     private javax.swing.JLabel labelNombre;
