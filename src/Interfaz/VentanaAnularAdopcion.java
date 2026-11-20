@@ -60,6 +60,7 @@ public class VentanaAnularAdopcion extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Anular adopcion");
         setMaximumSize(null);
         setMinimumSize(null);
         setPreferredSize(new java.awt.Dimension(600, 470));

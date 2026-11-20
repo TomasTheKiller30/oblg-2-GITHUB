@@ -45,6 +45,7 @@ public class VentanaAltaEmpresa extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Alta de empresa");
+        setMinimumSize(new java.awt.Dimension(473, 340));
         getContentPane().setLayout(null);
 
         jSeparator1.setForeground(new java.awt.Color(153, 153, 153));

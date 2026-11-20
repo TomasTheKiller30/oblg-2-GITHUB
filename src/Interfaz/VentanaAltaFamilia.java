@@ -45,6 +45,7 @@ public class VentanaAltaFamilia extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Alta de familia");
+        setMinimumSize(new java.awt.Dimension(473, 340));
         getContentPane().setLayout(null);
 
         labelTitulo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N

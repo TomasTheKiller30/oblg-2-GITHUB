@@ -60,6 +60,7 @@ public class VentanaRegistrarDonacion extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registrar donacion");
+        setMinimumSize(new java.awt.Dimension(500, 470));
         getContentPane().setLayout(null);
 
         labelTitulo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -70,7 +71,7 @@ public class VentanaRegistrarDonacion extends javax.swing.JFrame {
         jSeparator1.setForeground(new java.awt.Color(153, 153, 153));
         jSeparator1.setToolTipText("");
         getContentPane().add(jSeparator1);
-        jSeparator1.setBounds(0, 40, 540, 10);
+        jSeparator1.setBounds(0, 40, 720, 10);
 
         labelTituloListaEmpresas.setText("Empresas:");
         getContentPane().add(labelTituloListaEmpresas);
@@ -80,30 +81,31 @@ public class VentanaRegistrarDonacion extends javax.swing.JFrame {
         jScrollPane1.setViewportView(listaEmpresas);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(36, 80, 220, 310);
+        jScrollPane1.setBounds(36, 80, 310, 310);
 
         comboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 - Perros grandes", "2 - Perros chicos", "3 - Perros adultos", "4 - Otra" }));
         getContentPane().add(comboTipo);
-        comboTipo.setBounds(280, 190, 150, 40);
+        comboTipo.setBounds(370, 190, 180, 40);
 
         labelTipoAlimento.setText("Tipo de alimento");
         getContentPane().add(labelTipoAlimento);
-        labelTipoAlimento.setBounds(280, 160, 140, 16);
+        labelTipoAlimento.setBounds(370, 160, 140, 16);
         getContentPane().add(txtKilos);
-        txtKilos.setBounds(280, 280, 150, 40);
+        txtKilos.setBounds(370, 280, 180, 40);
 
         labelKilos.setText("Cantidad (kg)");
         getContentPane().add(labelKilos);
-        labelKilos.setBounds(280, 250, 100, 16);
+        labelKilos.setBounds(370, 250, 100, 16);
 
         btnRegistrar.setText("Registrar");
+        btnRegistrar.setMaximumSize(new java.awt.Dimension(200, 200));
         btnRegistrar.addActionListener(this::btnRegistrarActionPerformed);
         getContentPane().add(btnRegistrar);
-        btnRegistrar.setBounds(310, 360, 80, 23);
+        btnRegistrar.setBounds(390, 350, 150, 23);
 
         labelNumeroDonacion.setText("NumeroDonacion");
         getContentPane().add(labelNumeroDonacion);
-        labelNumeroDonacion.setBounds(280, 80, 150, 40);
+        labelNumeroDonacion.setBounds(370, 80, 190, 40);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
