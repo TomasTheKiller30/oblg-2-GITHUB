@@ -56,7 +56,7 @@ public class PanelPrincipal extends javax.swing.JFrame {
         resumen_AlimentoOtro = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        listaAnimales = new javax.swing.JList<>();
+        listaAnimales = new javax.swing.JList();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuAltas = new javax.swing.JMenu();
         m_a_Animales = new javax.swing.JMenuItem();
@@ -292,6 +292,11 @@ public class PanelPrincipal extends javax.swing.JFrame {
         menuMovimientos.add(m_m_AnularAdopcion);
 
         m_m_RegistrarDonacion.setText("Registrar donación");
+        m_m_RegistrarDonacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                m_m_RegistrarDonacionActionPerformed(evt);
+            }
+        });
         menuMovimientos.add(m_m_RegistrarDonacion);
 
         m_m_ImportarDonaciones.setText("Importar donaciones");
@@ -355,6 +360,10 @@ public class PanelPrincipal extends javax.swing.JFrame {
         ventanaAlta3.setVisible(true);
     }//GEN-LAST:event_m_a_EmpresasActionPerformed
 
+    private void m_m_RegistrarDonacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_m_RegistrarDonacionActionPerformed
+        new VentanaRegistrarDonacion(this.modelo).setVisible(true);
+    }//GEN-LAST:event_m_m_RegistrarDonacionActionPerformed
+
   
 // esto en gris es el initComponents();
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -373,7 +382,7 @@ public class PanelPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList<String> listaAnimales;
+    private javax.swing.JList listaAnimales;
     private javax.swing.JMenuItem m_a_Animales;
     private javax.swing.JMenuItem m_a_Empresas;
     private javax.swing.JMenuItem m_a_Familias;
