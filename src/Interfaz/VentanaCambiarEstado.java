@@ -7,6 +7,8 @@ package Interfaz;
 import Dominio.*;
 import java.awt.Color;
 import java.awt.Component;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -16,7 +18,7 @@ import javax.swing.JOptionPane;
  *
  * @author tomas
  */
-public class VentanaCambiarEstado extends javax.swing.JFrame {
+public class VentanaCambiarEstado extends javax.swing.JFrame implements PropertyChangeListener {
     
     private Sistema modelo;
     
@@ -89,7 +91,7 @@ public class VentanaCambiarEstado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cargarListas(){
-        listaAnimales.setListData(modelo.AnimalesParaAdoptar());
+        listaAnimales.setListData(modelo.animalesParaAdoptar());
     }
     
     //Se usa para mostrar los colores por primera vez y recargarlos mas adelante
@@ -143,4 +145,10 @@ public class VentanaCambiarEstado extends javax.swing.JFrame {
     private javax.swing.JLabel labelTituloListaAnimales;
     private javax.swing.JList<Animal> listaAnimales;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        cargarListas();
+        configurarColores();
+    }
 }

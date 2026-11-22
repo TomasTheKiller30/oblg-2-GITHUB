@@ -8,7 +8,6 @@ package Dominio;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.*;
-import java.nio.*;
 import java.io.*;
 import java.nio.file.*;
 /**
@@ -54,7 +53,7 @@ public class Sistema implements Serializable{
             
             System.out.println("Error al guardar los datos del sistema");
         }
-}
+    }
     public void recuperarDatos() {
         try {
             
@@ -77,6 +76,7 @@ public class Sistema implements Serializable{
             
             
             input.close();
+            manejador.firePropertyChange("cambio", false, true);
             
         } catch (IOException | ClassNotFoundException e) {
             
@@ -86,7 +86,7 @@ public class Sistema implements Serializable{
     
     // parte de Patron Observer
     public void agregarSubscriptor(PropertyChangeListener observer){
-        manejador.addPropertyChangeListener( observer);
+        manejador.addPropertyChangeListener(observer);
     }
     
     
@@ -134,6 +134,56 @@ public class Sistema implements Serializable{
     }
     
     
+    public void generarPaginaHtml(String rutaArchivo) throws FileNotFoundException {
+        
+        ArrayList<Adopcion> listaAdopciones = new ArrayList<>(getListaAdopciones());
+        Collections.sort(listaAdopciones, new Comparator<Adopcion>() {
+            @Override
+            public int compare(Adopcion a1, Adopcion a2) {
+                return a1.getNumeroAdopcion() - a2.getNumeroAdopcion();
+            }
+        });
+
+        // 2. Creamos el archivo con Formatter
+        Formatter arch = new Formatter(rutaArchivo);
+
+        arch.format("%s%n", "<!DOCTYPE html>");
+        arch.format("%s%n", "<html>");
+        arch.format("%s%n", "<head><meta charset='UTF-8'><title>Reporte de adopciones</title></head>");
+        arch.format("%s%n", "<body>");
+        arch.format("%s%n", "<h1>Reporte de adopciones</h1>");
+        arch.format("%s%n", "<p>Total de adopciones: " + listaAdopciones.size() + "</p>");
+
+        
+        if (listaAdopciones.isEmpty()) {
+            arch.format("%s%n", "<p>No existen adopciones registradas.</p>");
+        } else {
+            
+            arch.format("%s%n", "<table border='1' cellpadding='5'>");
+            arch.format("%s%n", "<tr><th>Número</th><th>Código</th><th>Animal</th><th>Familia</th><th>Comentarios</th></tr>");
+
+            for (int i = 0; i < listaAdopciones.size(); i++) {
+                Adopcion a = listaAdopciones.get(i);
+                arch.format("%s%n", "<tr>"
+                        + "<td>" + a.getNumeroAdopcion() + "</td>"
+                        + "<td>" + a.getAnimal().getCodigo() + "</td>"
+                        + "<td>" + a.getAnimal().getNombreAnimal() + "</td>"
+                        + "<td>" + a.getFamilia().getApellido() + "</td>"
+                        + "<td>" + a.getComentario() + "</td>"
+                        + "</tr>");
+            }
+            arch.format("%s%n", "</table>");
+        }
+
+        arch.format("%s%n", "</body>");
+        arch.format("%s%n", "</html>");
+
+        arch.close();
+    }
+    
+    
+    
+    
     // Metodos de Adopcion.
     
     private int proximoNumeroAdopcion = 1;
@@ -149,6 +199,10 @@ public class Sistema implements Serializable{
         getListaAdopciones().add(A);
         unAnimal.setEstado("Entregado a Familia");
         proximoNumeroAdopcion++;
+        
+        manejador.firePropertyChange("cambio", false, true);
+        
+        
         return n;      
     }
     
@@ -174,6 +228,7 @@ public class Sistema implements Serializable{
                 
             }
         }
+        manejador.firePropertyChange("cambio", false, true);
     }
     
     
@@ -198,6 +253,8 @@ public class Sistema implements Serializable{
             Animal A = new Animal(codigoIng, nombreIng, temperamentoIng, pesoIng, estadoIng);
             this.listaAnimales.add(A);
         }
+        
+        manejador.firePropertyChange("cambio", false, true);
     
     }
     
@@ -217,7 +274,7 @@ public class Sistema implements Serializable{
     
     
     // hace lo mismo que AnimalesDisponibles, pero devuelve el array simple de todos los animales que no estan en un proceso de adopción
-    public Animal[] AnimalesParaAdoptar() {
+    public Animal[] animalesParaAdoptar() {
         ArrayList<Animal> l = new ArrayList<>();
 
         for (int i = 0; i < getListaAnimales().size() ; i++ ){
@@ -227,6 +284,12 @@ public class Sistema implements Serializable{
             }
         }
     return l.toArray(new Animal[0]);
+    }
+    
+    // se usa en PanelPrincipal para mostrar TODOS los animales indiferentemente de su estado ("Disponible", "No Disponible", "Entregado a Familia", "En Proceso")
+    public Animal[] todosLosAnimales(){
+        ArrayList<Animal> l = new ArrayList<>(getListaAnimales());
+        return l.toArray(new Animal[0]);
     }
     
     public void intercambiarEstado(Animal unAnimal) {
@@ -239,6 +302,17 @@ public class Sistema implements Serializable{
                 unAnimal.setEstado("Disponible");
             }
         }
+        manejador.firePropertyChange("cambio", false, true);
+    }
+    
+    public int cantidadAnimalesPorEstado(String unEstado) {
+        int cant = 0;
+        for (int i = 0; i < getListaAnimales().size(); i++) {
+            if (getListaAnimales().get(i).getEstado().equals(unEstado)) {
+                cant++;
+            }
+        }
+        return cant;
     }
     
     // Metodos de Donacion.
@@ -253,6 +327,11 @@ public class Sistema implements Serializable{
         int numero = proximoNumeroDonacion;
         listaDonaciones.add(new Donacion(numero, empresa, tipo, kilos));
         proximoNumeroDonacion++;
+        
+        
+        manejador.firePropertyChange("cambio", false, true);
+        
+        
         return numero;
     }
 
@@ -306,6 +385,8 @@ public class Sistema implements Serializable{
             Empresa A = new Empresa(unNombreEmpresa, unRut, unaDireccion);
             this.listaEmpresas.add(A);
         }
+        
+        manejador.firePropertyChange("cambio", false, true);
     
     }    
     
@@ -328,6 +409,8 @@ public class Sistema implements Serializable{
             Familia A = new Familia(cedulaIngreso, apellidoIngreso, celularIngreso);
             this.listaFamilias.add(A);
         }
+        
+        manejador.firePropertyChange("cambio", false, true);
     
     }
     
@@ -359,8 +442,8 @@ public class Sistema implements Serializable{
     public int cantidadAdopcionesFamilia(Familia unaFamilia) {
         int cant = 0;
         for (int i = 0; i < getListaAdopciones().size(); i++) {
-            Familia f = getListaAdopciones().get(i).getFamilia();
-            if (f.equals(unaFamilia)) {
+            String f = getListaAdopciones().get(i).getFamilia().getCedula();
+            if (f.equals(unaFamilia.getCedula())) {
                 cant++;
             }
         }

@@ -7,13 +7,15 @@ import Dominio.*;
 import MainPackage.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author tomas
  */
-public class VentanaRealizarAdopcion extends javax.swing.JFrame {
+public class VentanaRealizarAdopcion extends javax.swing.JFrame implements PropertyChangeListener{
     private Sistema modelo;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VentanaRealizarAdopcion.class.getName());
@@ -279,5 +281,10 @@ public class VentanaRealizarAdopcion extends javax.swing.JFrame {
     private javax.swing.JPanel panelInfo;
     private javax.swing.JTextField textFieldComentarios;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        cargarListas();
     }
+}
 

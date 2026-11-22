@@ -5,6 +5,8 @@
 package Interfaz;
 import Dominio.*;
 import java.awt.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.table.*;
@@ -13,7 +15,7 @@ import javax.swing.table.*;
  *
  * @author tomas
  */
-public class VentanaConsultaFamilia extends javax.swing.JFrame {
+public class VentanaConsultaFamilia extends javax.swing.JFrame implements PropertyChangeListener{
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VentanaConsultaFamilia.class.getName());
     private Sistema modelo;
@@ -23,13 +25,14 @@ public class VentanaConsultaFamilia extends javax.swing.JFrame {
     public VentanaConsultaFamilia(Sistema unSistema) {
         this.modelo = unSistema;
         initComponents();
+        cargarTabla();
     }
 
     private void cargarTabla (){
         DefaultTableModel modeloTabla = (DefaultTableModel) tablaInfo.getModel(); 
         modeloTabla.setRowCount(0);
         
-       Familia[] lista;
+        Familia[] lista;
         if (radioPorApellido.isSelected()) {
             lista = modelo.familiasOrdenadasPorApellido();
         } 
@@ -71,6 +74,7 @@ public class VentanaConsultaFamilia extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaInfo = new javax.swing.JTable();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(460, 585));
         setPreferredSize(new java.awt.Dimension(460, 585));
         getContentPane().setLayout(null);
@@ -154,4 +158,9 @@ public class VentanaConsultaFamilia extends javax.swing.JFrame {
     private javax.swing.JRadioButton radioPorApellido;
     private javax.swing.JTable tablaInfo;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        cargarTabla();
+    }
 }

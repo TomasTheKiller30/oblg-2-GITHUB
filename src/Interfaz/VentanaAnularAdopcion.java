@@ -7,12 +7,14 @@ package Interfaz;
 import Dominio.*;
 import MainPackage.*;
 import java.awt.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import javax.swing.*;
 /**
  *
  * @author tomas
  */
-public class VentanaAnularAdopcion extends javax.swing.JFrame {
+public class VentanaAnularAdopcion extends javax.swing.JFrame implements PropertyChangeListener {
     
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VentanaAnularAdopcion.class.getName());
@@ -75,13 +77,13 @@ public class VentanaAnularAdopcion extends javax.swing.JFrame {
 
         jSeparator2.setForeground(new java.awt.Color(153, 153, 153));
         getContentPane().add(jSeparator2);
-        jSeparator2.setBounds(0, 40, 620, 10);
+        jSeparator2.setBounds(0, 40, 600, 10);
 
         labelAnularAdopcion.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         labelAnularAdopcion.setText("Anular Adopcion");
         labelAnularAdopcion.setToolTipText("");
         getContentPane().add(labelAnularAdopcion);
-        labelAnularAdopcion.setBounds(10, 10, 150, 25);
+        labelAnularAdopcion.setBounds(10, 10, 130, 25);
 
         labelTituloListaAdopciones.setText("Adopciones:");
         getContentPane().add(labelTituloListaAdopciones);
@@ -277,4 +279,9 @@ public class VentanaAnularAdopcion extends javax.swing.JFrame {
     private javax.swing.JList<Adopcion> listaAdopciones;
     private javax.swing.JPanel panelInfo;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        cargarListas();
+    }
 }
