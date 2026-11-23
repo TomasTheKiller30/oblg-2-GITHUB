@@ -62,6 +62,7 @@ public class VentanaAnularAdopcion extends javax.swing.JFrame implements Propert
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Anular adopcion");
         setMaximumSize(null);
         setMinimumSize(null);
         setPreferredSize(new java.awt.Dimension(600, 470));
@@ -83,7 +84,7 @@ public class VentanaAnularAdopcion extends javax.swing.JFrame implements Propert
         labelAnularAdopcion.setText("Anular Adopcion");
         labelAnularAdopcion.setToolTipText("");
         getContentPane().add(labelAnularAdopcion);
-        labelAnularAdopcion.setBounds(10, 10, 130, 25);
+        labelAnularAdopcion.setBounds(10, 10, 150, 25);
 
         labelTituloListaAdopciones.setText("Adopciones:");
         getContentPane().add(labelTituloListaAdopciones);

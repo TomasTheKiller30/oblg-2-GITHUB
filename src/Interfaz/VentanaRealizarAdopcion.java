@@ -58,6 +58,7 @@ public class VentanaRealizarAdopcion extends javax.swing.JFrame implements Prope
         labelMostrarNumeroAdopcion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Nueva adopcion");
         setMinimumSize(new java.awt.Dimension(720, 600));
         setResizable(false);
         setSize(new java.awt.Dimension(720, 600));

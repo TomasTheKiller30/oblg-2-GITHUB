@@ -39,9 +39,13 @@ public class VentanaAltaFamilia extends javax.swing.JFrame {
         txtApellido = new javax.swing.JTextField();
         txtCelular = new javax.swing.JTextField();
         btnAceptar = new javax.swing.JButton();
+        labelCelular = new javax.swing.JLabel();
+        labelApellido = new javax.swing.JLabel();
+        labelCedula = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Alta de familia");
+        setMinimumSize(new java.awt.Dimension(473, 340));
         getContentPane().setLayout(null);
 
         labelTitulo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -55,19 +59,16 @@ public class VentanaAltaFamilia extends javax.swing.JFrame {
         jSeparator1.setBounds(0, 40, 480, 10);
 
         txtCedula.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtCedula.setText("Cedula...");
         txtCedula.setName(""); // NOI18N
         getContentPane().add(txtCedula);
         txtCedula.setBounds(30, 70, 120, 22);
         txtCedula.getAccessibleContext().setAccessibleName("");
 
         txtApellido.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtApellido.setText("Apellido...");
         getContentPane().add(txtApellido);
         txtApellido.setBounds(30, 110, 120, 22);
 
         txtCelular.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtCelular.setText("Celular...");
         getContentPane().add(txtCelular);
         txtCelular.setBounds(30, 150, 120, 22);
 
@@ -76,7 +77,22 @@ public class VentanaAltaFamilia extends javax.swing.JFrame {
         btnAceptar.setText("Aceptar");
         btnAceptar.addActionListener(this::btnAceptarActionPerformed);
         getContentPane().add(btnAceptar);
-        btnAceptar.setBounds(280, 150, 100, 23);
+        btnAceptar.setBounds(260, 200, 100, 23);
+
+        labelCelular.setForeground(new java.awt.Color(51, 51, 51));
+        labelCelular.setText("(Celular)");
+        getContentPane().add(labelCelular);
+        labelCelular.setBounds(160, 160, 130, 16);
+
+        labelApellido.setForeground(new java.awt.Color(51, 51, 51));
+        labelApellido.setText("(Apellido)");
+        getContentPane().add(labelApellido);
+        labelApellido.setBounds(160, 120, 130, 16);
+
+        labelCedula.setForeground(new java.awt.Color(51, 51, 51));
+        labelCedula.setText("(Cedula)");
+        getContentPane().add(labelCedula);
+        labelCedula.setBounds(160, 80, 130, 16);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -103,6 +119,9 @@ public class VentanaAltaFamilia extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel labelApellido;
+    private javax.swing.JLabel labelCedula;
+    private javax.swing.JLabel labelCelular;
     private javax.swing.JLabel labelTitulo;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtCedula;

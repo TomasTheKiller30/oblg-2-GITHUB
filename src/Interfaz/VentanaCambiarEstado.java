@@ -54,6 +54,7 @@ public class VentanaCambiarEstado extends javax.swing.JFrame implements Property
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cambiar estado");
         setMaximumSize(new java.awt.Dimension(331, 490));
         setMinimumSize(new java.awt.Dimension(331, 490));
         setPreferredSize(new java.awt.Dimension(331, 490));

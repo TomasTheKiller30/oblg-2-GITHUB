@@ -39,9 +39,13 @@ public class VentanaAltaEmpresa extends javax.swing.JFrame {
         txtRut = new javax.swing.JTextField();
         txtDireccion = new javax.swing.JTextField();
         btnAceptar = new javax.swing.JButton();
+        labelRut = new javax.swing.JLabel();
+        labelDireccioes = new javax.swing.JLabel();
+        labelNombre = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Alta de empresa");
+        setMinimumSize(new java.awt.Dimension(473, 340));
         getContentPane().setLayout(null);
 
         jSeparator1.setForeground(new java.awt.Color(153, 153, 153));
@@ -55,18 +59,15 @@ public class VentanaAltaEmpresa extends javax.swing.JFrame {
         labelTitulo.setBounds(10, 10, 140, 20);
 
         txtNombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtNombre.setText("Nombre...");
         txtNombre.setName(""); // NOI18N
         getContentPane().add(txtNombre);
         txtNombre.setBounds(30, 70, 120, 22);
 
         txtRut.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtRut.setText("Rut...");
         getContentPane().add(txtRut);
         txtRut.setBounds(30, 110, 120, 22);
 
         txtDireccion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtDireccion.setText("Direccion...");
         getContentPane().add(txtDireccion);
         txtDireccion.setBounds(30, 150, 120, 22);
 
@@ -75,7 +76,24 @@ public class VentanaAltaEmpresa extends javax.swing.JFrame {
         btnAceptar.setText("Aceptar");
         btnAceptar.addActionListener(this::btnAceptarActionPerformed);
         getContentPane().add(btnAceptar);
-        btnAceptar.setBounds(280, 150, 100, 23);
+        btnAceptar.setBounds(280, 220, 100, 23);
+
+        labelRut.setForeground(new java.awt.Color(51, 51, 51));
+        labelRut.setText("(Rut)");
+        getContentPane().add(labelRut);
+        labelRut.setBounds(160, 120, 130, 20);
+        labelRut.getAccessibleContext().setAccessibleName("labelRut");
+
+        labelDireccioes.setForeground(new java.awt.Color(51, 51, 51));
+        labelDireccioes.setText("(Direcciones)");
+        getContentPane().add(labelDireccioes);
+        labelDireccioes.setBounds(160, 160, 130, 20);
+
+        labelNombre.setForeground(new java.awt.Color(51, 51, 51));
+        labelNombre.setText("(Nombre)");
+        getContentPane().add(labelNombre);
+        labelNombre.setBounds(160, 80, 130, 16);
+        labelNombre.getAccessibleContext().setAccessibleName("labelNombre");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -101,6 +119,9 @@ public class VentanaAltaEmpresa extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel labelDireccioes;
+    private javax.swing.JLabel labelNombre;
+    private javax.swing.JLabel labelRut;
     private javax.swing.JLabel labelTitulo;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtNombre;
