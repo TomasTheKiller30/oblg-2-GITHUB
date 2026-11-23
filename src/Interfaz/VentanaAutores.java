@@ -34,9 +34,14 @@ public class VentanaAutores extends javax.swing.JFrame {
         labelAnularAdopcion = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         labelFranco = new javax.swing.JLabel();
-        labelTomi1 = new javax.swing.JLabel();
+        labelTomi = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(530, 330));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -48,26 +53,46 @@ public class VentanaAutores extends javax.swing.JFrame {
 
         jSeparator2.setForeground(new java.awt.Color(153, 153, 153));
         getContentPane().add(jSeparator2);
-        jSeparator2.setBounds(0, 40, 420, 10);
+        jSeparator2.setBounds(0, 40, 550, 10);
 
-        labelFranco.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        labelFranco.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         labelFranco.setText("Franco Quintana (395147)");
         getContentPane().add(labelFranco);
-        labelFranco.setBounds(10, 70, 190, 22);
+        labelFranco.setBounds(60, 80, 170, 20);
 
-        labelTomi1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        labelTomi1.setText("Tomás Inetti (371567)");
-        getContentPane().add(labelTomi1);
-        labelTomi1.setBounds(20, 230, 160, 22);
+        labelTomi.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelTomi.setText("Tomás Inetti (371567)");
+        getContentPane().add(labelTomi);
+        labelTomi.setBounds(300, 80, 160, 22);
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fotocaFranco.jpg"))); // NOI18N
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(70, 110, 150, 140);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fotocaTomi.jpg"))); // NOI18N
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(310, 110, 150, 140);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(60, 100, 170, 160);
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        getContentPane().add(jPanel2);
+        jPanel2.setBounds(300, 100, 170, 160);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel labelAnularAdopcion;
     private javax.swing.JLabel labelFranco;
-    private javax.swing.JLabel labelTomi1;
+    private javax.swing.JLabel labelTomi;
     // End of variables declaration//GEN-END:variables
 }
