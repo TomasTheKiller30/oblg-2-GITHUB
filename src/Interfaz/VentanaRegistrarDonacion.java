@@ -61,6 +61,7 @@ public class VentanaRegistrarDonacion extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registrar donacion");
         setMinimumSize(new java.awt.Dimension(500, 470));
+        setSize(new java.awt.Dimension(500, 470));
         getContentPane().setLayout(null);
 
         labelTitulo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -107,7 +108,7 @@ public class VentanaRegistrarDonacion extends javax.swing.JFrame {
         getContentPane().add(labelNumeroDonacion);
         labelNumeroDonacion.setBounds(370, 80, 190, 40);
 
-        pack();
+        setBounds(0, 0, 741, 482);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed

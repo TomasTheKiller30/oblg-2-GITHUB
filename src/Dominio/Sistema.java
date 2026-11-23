@@ -5,6 +5,8 @@
 package Dominio;
 
 //no borrar
+import io.ArchivoGrabacion;
+import io.ArchivoLectura;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.*;
@@ -272,6 +274,68 @@ public class Sistema implements Serializable{
         return total;
     }
     
+    // Devuelve la cantidad de líneas con error (0 = todo ok)
+public int importarDonaciones(String ruta) {
+    ArchivoLectura arch = new ArchivoLectura(ruta);
+    ArrayList<String> errores = new ArrayList<>();
+    int numeroLinea = 0;
+
+    while (arch.hayMasLineas()) {
+        numeroLinea++;
+        String error = procesarLineaDonacion(arch.linea());
+        if (!error.isEmpty()) {
+            errores.add("Línea " + numeroLinea + ": " + error.trim());
+        }
+    }
+    arch.cerrar();
+
+    if (!errores.isEmpty()) {
+        ArchivoGrabacion archError = new ArchivoGrabacion(nombreArchivoError(ruta));
+        for (int i = 0; i < errores.size(); i++) {
+            archError.grabarLinea(errores.get(i));
+        }
+        archError.cerrar();
+    }
+    return errores.size();
+}
+
+// Registra la donación si la línea es válida; si no, devuelve los errores encontrados
+private String procesarLineaDonacion(String linea) {
+    String error = "";
+    String[] partes = linea.split("#");
+
+    if (partes.length != 3) {
+        error = "formato incorrecto (se espera rut#tipo#kilos).";
+    } else {
+        Empresa empresa = buscarEmpresa(partes[0].trim());
+        int tipo = convertirEntero(partes[1]);
+        int kilos = convertirEntero(partes[2]);
+
+        if (empresa == null) {
+            error += "Empresa no registrada. ";
+        }
+        if (!esTipoValido(tipo)) {
+            error += "Tipo incorrecto. ";
+        }
+        if (kilos <= 0) {
+            error += "Cantidad incorrecta. ";
+        }
+        if (error.isEmpty()) {
+            registrarDonacion(empresa, tipo, kilos);
+        }
+    }
+    return error;
+}
+
+// "C:/carpeta/Datos.txt" -> "C:/carpeta/DatosError.txt"
+private String nombreArchivoError(String ruta) {
+    String nombre = ruta + "Error";
+    int punto = ruta.lastIndexOf(".");
+    if (punto != -1) {
+        nombre = ruta.substring(0, punto) + "Error" + ruta.substring(punto);
+    }
+    return nombre;
+}
 
     // Metodos de Empresa.
 

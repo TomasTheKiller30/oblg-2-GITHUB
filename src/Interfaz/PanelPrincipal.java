@@ -300,6 +300,11 @@ public class PanelPrincipal extends javax.swing.JFrame {
         menuMovimientos.add(m_m_RegistrarDonacion);
 
         m_m_ImportarDonaciones.setText("Importar donaciones");
+        m_m_ImportarDonaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                m_m_ImportarDonacionesActionPerformed(evt);
+            }
+        });
         menuMovimientos.add(m_m_ImportarDonaciones);
 
         jMenuBar1.add(menuMovimientos);
@@ -363,6 +368,10 @@ public class PanelPrincipal extends javax.swing.JFrame {
     private void m_m_RegistrarDonacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_m_RegistrarDonacionActionPerformed
         new VentanaRegistrarDonacion(this.modelo).setVisible(true);
     }//GEN-LAST:event_m_m_RegistrarDonacionActionPerformed
+
+    private void m_m_ImportarDonacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_m_ImportarDonacionesActionPerformed
+        new VentanaImportarDonaciones(this.modelo).setVisible(true);
+    }//GEN-LAST:event_m_m_ImportarDonacionesActionPerformed
 
   
 // esto en gris es el initComponents();

@@ -76,6 +76,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Importar donaciones"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="m_m_ImportarDonacionesActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
